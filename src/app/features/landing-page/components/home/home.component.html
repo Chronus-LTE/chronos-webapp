@@ -1,0 +1,121 @@
+<div class="landing-page">
+  <!-- Navigation -->
+  <nav class="navigation">
+    <div class="nav-container">
+      <a routerLink="/" class="logo">
+        <div class="logo-mark"></div>
+        <span class="logo-text">Chronus</span>
+      </a>
+
+      <div class="nav-links">
+        <a routerLink="/features" class="nav-link">Features</a>
+        <a routerLink="/about" class="nav-link">About</a>
+        <a routerLink="/chat" class="nav-link-cta">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Your intelligent<br />personal assistant
+        </h1>
+        <p class="hero-description">
+          Chronus helps you manage your schedule and organize tasks through natural conversation.
+        </p>
+        <div class="hero-actions">
+          <a routerLink="/chat" class="btn-primary">Start a conversation</a>
+          <a routerLink="/features" class="btn-secondary">Explore features</a>
+        </div>
+      </div>
+
+      <!-- Elegant Visual -->
+      <div class="hero-visual">
+        <div class="visual-container">
+          <div class="orbit-ring ring-1"></div>
+          <div class="orbit-ring ring-2"></div>
+          <div class="orbit-ring ring-3"></div>
+          <div class="center-core"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities Section -->
+  <section class="capabilities">
+    <div class="capabilities-container">
+      <h2 class="section-title">Built for productivity</h2>
+      <p class="section-subtitle">
+        Everything you need to work smarter and stay organized.
+      </p>
+
+      <div class="capabilities-grid">
+        <div class="capability-card" *ngFor="let capability of capabilities">
+          <div class="capability-icon">
+            <i class="fas {{ capability.icon }}"></i>
+          </div>
+          <h3 class="capability-title">{{ capability.title }}</h3>
+          <p class="capability-description">{{ capability.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Highlight -->
+  <section class="features-highlight">
+    <div class="features-container">
+      <div class="feature-block" *ngFor="let feature of features; let i = index" [class.reverse]="i % 2 !== 0">
+        <div class="feature-content">
+          <h3 class="feature-title">{{ feature.title }}</h3>
+          <p class="feature-description">{{ feature.description }}</p>
+        </div>
+        <div class="feature-visual">
+          <div class="visual-placeholder"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2 class="cta-title">Ready to get started?</h2>
+      <p class="cta-description">
+        Experience a smarter way to manage your time and tasks.
+      </p>
+      <a routerLink="/chat" class="btn-primary-large">Start using Chronus</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-mark"></div>
+          <span class="logo-text">Chronus</span>
+        </div>
+        <p class="footer-tagline">Your intelligent personal assistant</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>Product</h4>
+          <a routerLink="/features">Features</a>
+          <a routerLink="/about">About</a>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {{ currentYear }} Chronus. All rights reserved.</p>
+    </div>
+  </footer>
+</div>

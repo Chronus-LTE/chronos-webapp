@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/theme';
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+:root {
+  font-family: var(--font-primary);
+  color: var(--clay-800);
+  background-color: var(--clay-50);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--clay-50);
+  color: var(--clay-800);
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font-family: inherit;
+}

@@ -1,0 +1,35 @@
+<div class="page">
+    <nav class="navigation">
+        <div class="nav-container">
+            <a routerLink="/" class="logo">
+                <div class="logo-mark"></div>
+                <span class="logo-text">Chronus</span>
+            </a>
+
+            <div class="nav-links">
+                <a routerLink="/features" class="nav-link active">Features</a>
+                <a routerLink="/about" class="nav-link">About</a>
+                <a routerLink="/chat" class="nav-link-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <header class="page-header">
+            <h1 class="page-title">Features</h1>
+            <p class="page-subtitle">
+                Discover what makes Chronus your intelligent personal assistant
+            </p>
+        </header>
+
+        <div class="features-grid">
+            <div class="feature-card" *ngFor="let feature of features">
+                <div class="feature-icon">
+                    <i class="fas {{ feature.icon }}"></i>
+                </div>
+                <h2 class="feature-title">{{ feature.title }}</h2>
+                <p class="feature-description">{{ feature.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
