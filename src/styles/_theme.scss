@@ -53,5 +53,14 @@ $neutral-ink: #1f1207;
   --panel-glow: rgba(var(--clay-200-rgb), 0.6);
   --shadow-soft: 0 20px 60px rgba(var(--clay-300-rgb), 0.35);
   --shadow-hard: 0 30px 80px rgba(var(--clay-500-rgb), 0.4);
+
+  /* Dark Theme Colors */
+  --dark-bg: #1a1614;
+  --dark-bg-gradient-center: #2c241b;
+  --dark-surface: #241e19;
+  --dark-border: rgba(255, 255, 255, 0.05);
+  --dark-input-bg: rgba(0, 0, 0, 0.2);
+  --dark-input-border: rgba(255, 255, 255, 0.1);
+  --dark-hover-bg: rgba(255, 255, 255, 0.08);
 }
 

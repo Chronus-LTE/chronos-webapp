@@ -1,0 +1,105 @@
+<div class="chat-container">
+  <!-- Sidebar -->
+  <aside class="chat-sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <span class="logo-text">Chronus</span>
+      </div>
+      <button class="btn-menu" title="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+      <button class="btn-new-chat">
+        <i class="fas fa-plus"></i>
+        <span>New Chat</span>
+      </button>
+
+      <div class="chat-history">
+        <h3 class="history-title">Recent</h3>
+        <div class="history-empty">
+          <p>No recent chats</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-info" *ngIf="currentUser">
+        <div class="user-avatar">
+          {{ currentUser?.email?.charAt(0).toUpperCase() || 'U' }}
+        </div>
+        <div class="user-details">
+          <p class="user-name">{{ currentUser?.full_name || currentUser?.email }}</p>
+          <p class="user-email">{{ currentUser?.email }}</p>
+        </div>
+      </div>
+      <button class="btn-logout" (click)="logout()" title="Logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Chat Area -->
+  <main class="chat-main">
+    <!-- Header -->
+    <header class="chat-header">
+      <h1 class="chat-title">Chat</h1>
+      <div class="header-actions">
+        <button class="btn-icon" title="Settings">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Messages Container -->
+    <div class="messages-container">
+      <div class="messages">
+        <div *ngFor="let message of messages"
+             class="message"
+             [class.user-message]="message.sender === 'user'"
+             [class.assistant-message]="message.sender === 'assistant'">
+          <div class="message-content">
+            <div class="message-bubble">
+              {{ message.content }}
+            </div>
+            <span class="message-time">
+              {{ message.timestamp | date:'short' }}
+            </span>
+          </div>
+        </div>
+
+        <div *ngIf="isLoading" class="message assistant-message">
+          <div class="message-content">
+            <div class="message-bubble typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Area -->
+    <footer class="chat-input-area">
+      <form class="chat-input-form" (ngSubmit)="sendMessage()">
+        <div class="input-wrapper">
+          <textarea
+            class="chat-input"
+            [(ngModel)]="userMessage"
+            name="message"
+            placeholder="Type your message here..."
+            (keydown.enter)="sendMessage()"
+            [disabled]="isLoading">
+          </textarea>
+          <button type="submit" class="btn-send" [disabled]="!userMessage.trim() || isLoading">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <p class="input-hint">Press Enter to send, Shift+Enter for new line</p>
+      </form>
+    </footer>
+  </main>
+</div>

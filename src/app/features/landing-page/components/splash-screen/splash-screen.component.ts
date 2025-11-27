@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoadingService } from '../../services/loading.service';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class SplashScreenComponent implements OnInit {
   isLoading$: Observable<boolean>;
 
-  constructor(@Inject(LoadingService) private loadingService: LoadingService) {
+  constructor(private loadingService: LoadingService) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
