@@ -1,0 +1,67 @@
+<div class="auth-container">
+    <a routerLink="/" class="btn-back">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Home</span>
+    </a>
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="auth-title">Create an account</h1>
+            <p class="auth-subtitle">Join us to start your journey</p>
+        </div>
+
+        <button type="button" class="btn-google" (click)="loginWithGoogle()">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+            <span>Sign up with Google</span>
+        </button>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" formControlName="fullName" placeholder="John Doe"
+                    [class.has-error]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched">
+                <div class="error-message"
+                    *ngIf="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched">
+                    <span *ngIf="registerForm.get('fullName')?.errors?.['required']">Full name is required</span>
+                    <span *ngIf="registerForm.get('fullName')?.errors?.['minlength']">Name must be at least 2
+                        characters</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email" placeholder="name@example.com"
+                    [class.has-error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                <div class="error-message"
+                    *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                    <span *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</span>
+                    <span *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" formControlName="password" placeholder="Create a password"
+                    [class.has-error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                <div class="error-message"
+                    *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                    <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
+                    <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8
+                        characters</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" [disabled]="registerForm.invalid || isLoading">
+                <span *ngIf="!isLoading">Create account</span>
+                <span *ngIf="isLoading" class="spinner"></span>
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a routerLink="/auth/login">Sign in</a></p>
+        </div>
+    </div>
+</div>
