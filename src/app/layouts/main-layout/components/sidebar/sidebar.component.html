@@ -1,0 +1,62 @@
+<aside class="sidebar" [class.collapsed]="collapsed">
+    <!-- Header with Logo and Toggle -->
+    <div class="sidebar-header">
+        <div class="logo-container" (click)="navigate('/chat')">
+            <img src="assets/logo/chronus-logo-symbol.png" class="logo-icon">
+        </div>
+    </div>
+
+    <!-- Navigation Items -->
+    <nav class="sidebar-nav">
+        <div class="nav-section">
+            <button *ngFor="let item of navItems" class="nav-item" [class.active]="isActive(item.route)"
+                (click)="navigate(item.route)" [attr.aria-label]="item.label"
+                [ngbTooltip]="item.label" placement="right" container="body">
+                <span class="nav-icon">
+                    <!-- Chat Icon -->
+                    <svg *ngIf="item.icon === 'chat'" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+
+                    <!-- Mail Icon -->
+                    <svg *ngIf="item.icon === 'mail'" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+
+                    <!-- Calendar Icon -->
+                    <svg *ngIf="item.icon === 'calendar'" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+
+                    <!-- Library/Knowledge Icon -->
+                    <svg *ngIf="item.icon === 'library'" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                </span>
+                <span class="nav-label" *ngIf="!collapsed">{{ item.label }}</span>
+            </button>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="nav-section nav-section-bottom">
+            <button class="nav-item profile-item" aria-label="Profile" [ngbTooltip]="'Profile'" placement="right" container="body">
+                <span class="nav-icon profile-avatar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </span>
+                <span class="nav-label" *ngIf="!collapsed">Profile</span>
+            </button>
+        </div>
+    </nav>
+</aside>

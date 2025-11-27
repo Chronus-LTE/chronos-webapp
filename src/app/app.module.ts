@@ -4,6 +4,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
+import { MainLayoutModule } from './layouts/main-layout/main-layout.module';
 
 import { AppComponent } from './app.component';
 import { SplashScreenComponent } from './features/landing-page/components/splash-screen/splash-screen.component';
@@ -18,6 +19,7 @@ import { SplashScreenComponent } from './features/landing-page/components/splash
     CommonModule,
     CoreModule,
     SharedModule,
+    MainLayoutModule,
     AppRoutingModule
   ],
   providers: [],
