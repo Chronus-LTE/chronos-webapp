@@ -5,8 +5,8 @@
 
 :root {
   font-family: var(--font-primary);
-  color: var(--clay-800);
-  background-color: var(--clay-50);
+  color: var(--sidebar-text);
+  background-color: var(--content-bg);
 }
 
 *,
@@ -17,14 +17,20 @@
 
 body {
   margin: 0;
-  background-color: var(--clay-50);
-  color: var(--clay-800);
+  background-color: var(--content-bg);
+  color: var(--sidebar-text);
   font-family: var(--font-primary);
   line-height: 1.6;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 button,
 input {
   font-family: inherit;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }

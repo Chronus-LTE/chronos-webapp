@@ -62,5 +62,22 @@ $neutral-ink: #1f1207;
   --dark-input-bg: rgba(0, 0, 0, 0.2);
   --dark-input-border: rgba(255, 255, 255, 0.1);
   --dark-hover-bg: rgba(255, 255, 255, 0.08);
+
+  /* Sidebar & Layout Colors - Clean & Light */
+  --sidebar-bg: #f9f9f8;
+  --sidebar-border: #e5e5e0;
+  --sidebar-hover: #efefed;
+  --sidebar-active: #e8e8e5;
+  --sidebar-text: #2d2d2d;
+  --sidebar-text-secondary: #6b6b6b;
+  --sidebar-icon: #4a4a4a;
+
+  --main-bg: #ffffff;
+  --main-border: #e8e8e5;
+  --content-bg: #fafaf9;
+
+  /* Accent colors for navigation */
+  --nav-accent: #d4a574;
+  --nav-accent-hover: #c98938;
 }
 

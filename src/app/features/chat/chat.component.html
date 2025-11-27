@@ -1,45 +1,4 @@
 <div class="chat-container">
-  <!-- Sidebar -->
-  <aside class="chat-sidebar">
-    <div class="sidebar-header">
-      <div class="logo">
-        <div class="logo-mark"></div>
-        <span class="logo-text">Chronus</span>
-      </div>
-      <button class="btn-menu" title="Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-
-    <div class="sidebar-content">
-      <button class="btn-new-chat">
-        <i class="fas fa-plus"></i>
-        <span>New Chat</span>
-      </button>
-
-      <div class="chat-history">
-        <h3 class="history-title">Recent</h3>
-        <div class="history-empty">
-          <p>No recent chats</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar-footer">
-      <div class="user-info" *ngIf="currentUser">
-        <div class="user-avatar">
-          {{ currentUser?.email?.charAt(0).toUpperCase() || 'U' }}
-        </div>
-        <div class="user-details">
-          <p class="user-name">{{ currentUser?.full_name || currentUser?.email }}</p>
-          <p class="user-email">{{ currentUser?.email }}</p>
-        </div>
-      </div>
-      <button class="btn-logout" (click)="logout()" title="Logout">
-        <i class="fas fa-sign-out-alt"></i>
-      </button>
-    </div>
-  </aside>
 
   <!-- Chat Area -->
   <main class="chat-main">
