@@ -12,11 +12,10 @@
       <div class="chat-history">
         <h3 class="history-title">Recent</h3>
         <div class="history-list">
-          <button *ngFor="let chat of chatHistory" class="history-item" [class.active]="chat.id === currentChatId"
+          <button *ngFor="let chat of (chatHistory$ | async)" class="history-item" [class.active]="chat.id === (currentConversationId$ | async)"
             (click)="loadChat(chat.id)">
-            <i class="fas fa-message"></i>
             <span class="history-item-title">{{ chat.title }}</span>
-            <button class="btn-delete" (click)="deleteChat(chat.id, $event)">
+            <button class="btn-delete" (click)="deleteConversation(chat.id, $event)">
               <i class="fas fa-trash"></i>
             </button>
           </button>
@@ -28,7 +27,7 @@
   <!-- Main Chat Area -->
   <main class="chat-main">
     <!-- Welcome Screen (shown when no messages) -->
-    <div class="welcome-screen" *ngIf="!isChatStarted">
+    <div class="welcome-screen" *ngIf="!(isChatStarted$ | async)">
       <div class="welcome-content">
         <div class="welcome-header">
           <div class="logo-large">
@@ -52,11 +51,11 @@
     </div>
 
     <!-- Chat Screen (shown when chat started) -->
-    <div class="chat-screen" *ngIf="isChatStarted">
+    <div class="chat-screen" *ngIf="isChatStarted$ | async">
       <!-- Messages Container -->
       <div class="messages-container" #messagesContainer>
         <div class="messages">
-          <div *ngFor="let message of messages" class="message" [class.user-message]="message.sender === 'user'"
+          <div *ngFor="let message of (messages$ | async)" class="message" [class.user-message]="message.sender === 'user'"
             [class.assistant-message]="message.sender === 'assistant'">
             <div class="message-avatar" *ngIf="message.sender === 'assistant'">
               <i class="fas fa-robot"></i>
@@ -68,7 +67,7 @@
             </div>
           </div>
 
-          <div *ngIf="isLoading" class="message assistant-message">
+          <div *ngIf="isLoading$ | async" class="message assistant-message">
             <div class="message-avatar">
               <i class="fas fa-robot"></i>
             </div>
@@ -89,17 +88,18 @@
       <div class="input-container">
         <form class="chat-input-form" (ngSubmit)="sendMessage()">
           <div class="input-wrapper">
-            <textarea #messageInput class="chat-input" [(ngModel)]="userMessage" name="message"
-              [placeholder]="isChatStarted ? 'Type your message...' : 'Ask me anything...'"
-              (keydown.enter)="handleEnterKey($event)" [disabled]="isLoading" rows="1">>
+            <textarea #messageInput class="chat-input" [ngModel]="userMessage$ | async" (ngModelChange)="setUserMessage($event)" name="message"
+              [placeholder]="(isChatStarted$ | async) ? 'Type your message...' : 'Ask me anything...'"
+              (keydown.enter)="handleEnterKey($event)" [disabled]="(isLoading$ | async) || false" rows="1">
             </textarea>
-            <button type="submit" class="btn-send" [disabled]="!userMessage.trim() || isLoading"
-              [class.active]="userMessage.trim()">
+            <button type="submit" class="btn-send" [disabled]="(!(userMessage$ | async)?.trim()) || ((isLoading$ | async) || false)"
+              [class.active]="!!(userMessage$ | async)?.trim()">
               <i class="fas fa-arrow-up"></i>
             </button>
           </div>
         </form>
-        <p class="input-hint">Chronus is your personal AI assistant. Always verify important information independently.</p>
+        <p class="input-hint">Chronus is your personal AI assistant. Always verify important information independently.
+        </p>
       </div>
     </footer>
   </main>

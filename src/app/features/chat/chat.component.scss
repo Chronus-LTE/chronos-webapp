@@ -9,7 +9,6 @@
   background: var(--main-bg);
 }
 
-/* ========== SIDEBAR ========== */
 .chat-sidebar {
   width: 260px;
   background: var(--sidebar-bg);
@@ -155,7 +154,6 @@
   }
 }
 
-/* ========== MAIN CHAT AREA ========== */
 .chat-main {
   flex: 1;
   display: flex;
@@ -165,7 +163,6 @@
   background: var(--main-bg);
 }
 
-/* ========== WELCOME SCREEN ========== */
 .welcome-screen {
   flex: 1;
   display: flex;
@@ -176,7 +173,7 @@
 }
 
 .welcome-content {
-  max-width: 900px;
+  max-width: 800px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -282,7 +279,6 @@
   margin: 0;
 }
 
-/* ========== CHAT SCREEN ========== */
 .chat-screen {
   flex: 1;
   display: flex;
@@ -326,22 +322,33 @@
   display: flex;
   gap: 1rem;
   animation: slideIn 0.3s ease-out;
+  align-items: flex-start;
 
   &.user-message {
-    flex-direction: row-reverse;
+    justify-content: flex-end;
+    flex-direction: row;
+
+    .message-content {
+      align-items: flex-end;
+    }
 
     .message-bubble {
       background: var(--clay-100);
       color: var(--neutral-ink);
       border-radius: 18px 18px 4px 18px;
+      max-width: 100%;
     }
   }
 
   &.assistant-message {
+
+    justify-content: flex-start;
+
     .message-bubble {
       background: transparent;
       color: var(--neutral-ink);
       border-radius: 18px 18px 18px 4px;
+      padding: 0.25rem 0;
     }
   }
 }
@@ -371,11 +378,11 @@
 }
 
 .message-content {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   min-width: 0;
+  max-width: 85%; /* Limit width of message content */
 }
 
 .message-bubble {
@@ -420,7 +427,6 @@
   }
 }
 
-/* ========== INPUT AREA ========== */
 .chat-input-area {
   padding: 1.5rem;
   border-top: 1px solid var(--sidebar-border);
@@ -521,7 +527,6 @@
   text-align: center;
 }
 
-/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   .chat-sidebar {
     position: absolute;
