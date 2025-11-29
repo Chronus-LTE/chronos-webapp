@@ -1,0 +1,75 @@
+:host {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+::ng-deep ngb-toast {
+    font-family: var(--font-primary);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    min-width: 320px;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+    animation: slideInRight 0.3s ease-out;
+    overflow: hidden;
+
+    .toast-header {
+        display: none;
+    }
+
+    .toast-body {
+        padding: 14px 16px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
+::ng-deep .bg-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+    color: white !important;
+}
+
+::ng-deep .bg-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%) !important;
+    color: white !important;
+}
+
+::ng-deep .bg-info {
+    background: linear-gradient(135deg, var(--nav-accent) 0%, var(--nav-accent-hover) 100%) !important;
+    color: white !important;
+}
+
+::ng-deep .bg-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%) !important;
+    color: #2d2d2d !important;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    :host {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+    }
+
+    ::ng-deep ngb-toast {
+        min-width: auto;
+        max-width: 100%;
+    }
+}
