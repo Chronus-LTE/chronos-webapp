@@ -100,12 +100,12 @@ export class AuthService {
         return !!this.getToken();
     }
 
-    getCurrentUser(): Observable<AuthResponse> {
-        return this.http.get<AuthResponse>(`${this.apiUrl}/auth/me`)
+    getCurrentUser(): Observable<User> {
+        return this.http.get<User>(`${this.apiUrl}/auth/me`)
             .pipe(
-                tap(response => {
-                    console.log('User retrieved from /auth/me:', response);
-                    this.currentUserSubject.next(response.user);
+                tap(user => {
+                    console.log('User retrieved from /auth/me:', user);
+                    this.currentUserSubject.next(user);
                 })
             );
     }

@@ -1,0 +1,134 @@
+.sidebar-container {
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.compose-btn-container {
+  margin-bottom: 16px;
+}
+
+.compose-btn {
+  width: 100%;
+  background-color: var(--neutral-ink);
+  color: var(--neutral-white);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// Filter Section
+.filter-section {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 6px;
+}
+
+.filter-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--main-border);
+  border-radius: 4px;
+  background-color: var(--content-bg);
+  color: var(--sidebar-text);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: var(--sidebar-hover);
+  }
+
+  &.active {
+    background-color: var(--nav-accent);
+    color: var(--neutral-white);
+    border-color: var(--nav-accent);
+  }
+}
+
+// Folders Section
+.folders-section {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--sidebar-text-secondary);
+  padding: 0 12px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.folders-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--sidebar-text);
+  margin-bottom: 4px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--sidebar-hover);
+  }
+
+  &.active {
+    background-color: var(--sidebar-active);
+    font-weight: 600;
+  }
+}
+
+.folder-icon {
+  width: 20px;
+  margin-right: 12px;
+  color: var(--sidebar-icon);
+  display: flex;
+  justify-content: center;
+}
+
+.folder-name {
+  flex: 1;
+  font-size: 14px;
+}
+
+.folder-count {
+  font-size: 12px;
+  color: var(--sidebar-text-secondary);
+  background: rgba(0,0,0,0.05);
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}

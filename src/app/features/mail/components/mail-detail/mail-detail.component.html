@@ -1,0 +1,69 @@
+<div class="detail-container" *ngIf="email$ | async as email">
+    <!-- Header -->
+    <div class="detail-header">
+        <!-- Subject and Actions Row -->
+        <div class="header-top">
+            <h2 class="subject">{{ email.subject }}</h2>
+            <div class="actions">
+                <button class="action-btn" (click)="toggleStar()" [class.starred]="email.isStarred"
+                    [title]="email.isStarred ? 'Unstar' : 'Star'" [ngbTooltip]="email.isStarred ? 'Unstar' : 'Star'">
+                    <i class="fa-star" [class.fas]="email.isStarred" [class.far]="!email.isStarred"></i>
+                </button>
+                <button class="action-btn" *ngIf="email.isUnread" (click)="markAsRead()" title="Mark as read"
+                    ngbTooltip="Mark as read">
+                    <i class="fas fa-envelope-open"></i>
+                </button>
+                <button class="action-btn" *ngIf="!email.isUnread" (click)="markAsUnread()" title="Mark as unread"
+                    ngbTooltip="Mark as unread">
+                    <i class="fas fa-envelope"></i>
+                </button>
+                <button class="action-btn" *ngIf="isDraft(email)" (click)="editDraft()" title="Edit Draft"
+                    ngbTooltip="Edit Draft">
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button class="action-btn" (click)="reply()" title="Reply" ngbTooltip="Reply">
+                    <i class="fas fa-reply"></i>
+                </button>
+                <button class="action-btn" (click)="forward()" title="Forward" ngbTooltip="Forward">
+                    <i class="fas fa-share"></i>
+                </button>
+                <button class="action-btn delete-btn" (click)="deleteEmail()" title="Delete" ngbTooltip="Delete">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sender Info Row -->
+        <div class="sender-info">
+            <img [src]="getAvatar(email.from)" class="avatar" alt="Avatar">
+            <div class="sender-details">
+                <div class="sender-name">{{ email.from }}</div>
+                <div class="email-meta">
+                    <span class="meta-label">to</span>
+                    <span class="meta-value">{{ email.to }}</span>
+                    <span class="meta-date">{{ email.date | date:'MMM d, y HH:mm' }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-body" [innerHTML]="email.body_plain || ''"></div>
+
+    <div class="attachments" *ngIf="email.attachments && email.attachments.length">
+        <div class="attachment-title">Attachments ({{ email.attachments.length }})</div>
+        <div class="attachment-list">
+            <div *ngFor="let att of email.attachments" class="attachment-item">
+                <i class="fas fa-file"></i>
+                <div class="att-info">
+                    <span class="att-name">{{ att.filename }}</span>
+                    <span class="att-size">{{ formatFileSize(att.size) }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="empty-detail" *ngIf="!(email$ | async)">
+    <i class="fas fa-envelope-open empty-icon"></i>
+    <p>Select an email to view</p>
+</div>

@@ -1,0 +1,77 @@
+<div class="list-container">
+    <div class="search-bar">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" placeholder="Search emails..." class="search-input" [formControl]="searchControl">
+    </div>
+
+    <div class="email-list" *ngIf="!(loading$ | async); else loadingTemplate">
+        <div *ngFor="let email of emails$ | async" class="email-item" [class.unread]="email.isUnread"
+            [class.selected]="(selectedEmail$ | async)?.id === email.id" (click)="selectEmail(email)">
+
+            <div class="email-header">
+                <div class="sender-info">
+                    <span class="sender-name">{{ email.from }}</span>
+                    <i class="star-icon fa-star" [class.fas]="email.isStarred" [class.far]="!email.isStarred"
+                        [class.starred]="email.isStarred" (click)="toggleStar($event, email)"
+                        [title]="email.isStarred ? 'Unstar' : 'Star'">
+                    </i>
+                </div>
+                <span class="email-date">{{ email.date | date:'MMM d' }}</span>
+            </div>
+
+            <div class="email-subject">{{ email.subject }}</div>
+            <div class="email-snippet">{{ email.snippet }}</div>
+
+            <div class="email-footer">
+                <div class="email-indicators">
+                    <span class="attachment-indicator" *ngIf="email.has_attachments">
+                        <i class="fas fa-paperclip"></i>
+                    </span>
+                </div>
+                <div class="email-actions">
+                    <button class="action-btn-small" (click)="toggleRead($event, email)"
+                        [title]="email.isUnread ? 'Mark as read' : 'Mark as unread'">
+                        <i class="fas" [class.fa-envelope-open]="email.isUnread"
+                            [class.fa-envelope]="!email.isUnread"></i>
+                    </button>
+                    <button class="action-btn-small delete-btn" (click)="deleteEmail($event, email)" title="Delete">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="(emails$ | async)?.length === 0">
+            <i class="fas fa-inbox empty-icon"></i>
+            <p>No emails found</p>
+        </div>
+    </div>
+
+    <!-- Loading Template -->
+    <ng-template #loadingTemplate>
+        <div class="loading-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading emails...</p>
+        </div>
+    </ng-template>
+
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="pagination$ | async as pagination">
+        <button class="pagination-btn" [disabled]="pagination.currentPage === 0"
+            (click)="goToPage(pagination.currentPage - 1)">
+            <i class="fas fa-chevron-left"></i>
+            Previous
+        </button>
+
+        <span class="pagination-info">
+            Page {{ pagination.currentPage + 1 }} of {{ pagination.totalPages || 1 }}
+            ({{ pagination.total }} total)
+        </span>
+
+        <button class="pagination-btn" [disabled]="!pagination.hasMore" (click)="goToPage(pagination.currentPage + 1)">
+            Next
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>

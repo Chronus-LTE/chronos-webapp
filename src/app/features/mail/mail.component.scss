@@ -1,0 +1,60 @@
+:host {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mail-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-bg);
+}
+
+.sync-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--nav-accent), var(--nav-accent-hover));
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+
+  i {
+    font-size: 14px;
+  }
+}
+
+.mail-content {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sidebar-pane {
+  width: 240px;
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.list-pane {
+  width: 350px;
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.detail-pane {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  overflow-y: auto;
+}

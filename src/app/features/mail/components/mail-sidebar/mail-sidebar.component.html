@@ -1,0 +1,43 @@
+<div class="sidebar-container">
+    <!-- Compose Button -->
+    <div class="compose-btn-container">
+        <button class="compose-btn" (click)="openCompose()">
+            <i class="fas fa-pen"></i>
+            <span>Compose</span>
+        </button>
+    </div>
+
+    <!-- Filter Options -->
+    <div class="filter-section">
+        <button class="filter-btn" [class.active]="showUnreadOnly" (click)="toggleUnreadFilter()"
+            title="Show unread emails only">
+            <i class="fas fa-envelope"></i>
+            <span>Unread</span>
+        </button>
+        <button class="filter-btn" [class.active]="showStarredOnly" (click)="toggleStarredFilter()"
+            title="Show starred emails only">
+            <i class="fas fa-star"></i>
+            <span>Starred</span>
+        </button>
+    </div>
+
+    <!-- System Folders -->
+    <div class="folders-section">
+        <h3 class="section-title">Folders</h3>
+        <div class="folders-list">
+            <div *ngFor="let folder of folders$ | async" class="folder-item"
+                [class.active]="(selectedFolder$ | async) === folder.id" (click)="selectFolder(folder.id)">
+                <div class="folder-icon">
+                    <i [class]="'fas fa-' + getIcon(folder.icon)"></i>
+                </div>
+                <span class="folder-name">{{ folder.name }}</span>
+                <span class="folder-count" *ngIf="folder.unread_messages && folder.unread_messages > 0">
+                    {{ folder.unread_messages }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compose Email Modal -->
+    <app-compose-email *ngIf="isComposeOpen$ | async" (close)="closeCompose()"></app-compose-email>
+</div>
