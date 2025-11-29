@@ -1,0 +1,73 @@
+<div class="calendar-container">
+    <div class="calendar-header">
+        <div class="header-left">
+            <h1>Calendar</h1>
+            <button class="btn btn-primary" (click)="openNewEventForm()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                New Event
+            </button>
+        </div>
+
+        <div class="header-controls">
+            <button class="btn btn-secondary" (click)="goToToday()">Today</button>
+            <div class="month-navigation">
+                <button class="nav-btn" (click)="previousMonth()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <span class="month-label">{{ getMonthYearString() }}</span>
+                <button class="nav-btn" (click)="nextMonth()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="calendar-content" *ngIf="!(loading$ | async); else loadingTemplate">
+        <div class="loading-bar" *ngIf="isSubmitting$ | async"></div>
+        <div class="calendar-grid">
+            <!-- Week day headers -->
+            <div class="week-header">
+                <div class="week-day" *ngFor="let day of weekDays">{{ day }}</div>
+            </div>
+
+            <!-- Calendar days -->
+            <div class="calendar-days">
+                <div *ngFor="let day of calendarDays" class="calendar-day" [class.other-month]="!day.isCurrentMonth"
+                    [class.today]="day.isToday" (click)="onDayClick(day)">
+                    <div class="day-number">{{ day.date.getDate() }}</div>
+                    <div class="day-events">
+                        <div *ngFor="let event of day.events" class="event-item" [style.background-color]="event.color"
+                            (click)="onEventClick(event, $event)" [title]="event.title">
+                            <span class="event-time" *ngIf="!event.allDay">
+                                {{ event.startTime | date:'shortTime' }}
+                            </span>
+                            <span class="event-title">{{ event.title }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #loadingTemplate>
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Loading calendar...</p>
+        </div>
+    </ng-template>
+</div>
+
+<!-- Event Form Modal -->
+<div class="modal-overlay" *ngIf="showEventForm" (click)="closeEventForm()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <app-event-form [event]="selectedEventForEdit" (save)="onSaveEvent($event)" (cancel)="closeEventForm()"
+            (delete)="onDeleteEvent($event)"></app-event-form>
+    </div>
+</div>

@@ -25,7 +25,7 @@ export class SidebarComponent {
         { id: 'chat', label: 'Chat', icon: 'chat', route: '/chat' },
         { id: 'mail', label: 'Mail', icon: 'mail', route: '/mail' },
         { id: 'calendar', label: 'Calendar', icon: 'calendar', route: '/calendar' },
-        { id: 'knowledge', label: 'Knowledge Base', icon: 'library', route: '/knowledge' }
+        // { id: 'knowledge', label: 'Knowledge Base', icon: 'library', route: '/knowledge' }
     ];
 
     currentUser$: Observable<any>;

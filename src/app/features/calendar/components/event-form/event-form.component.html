@@ -1,0 +1,113 @@
+<div class="event-form-container">
+    <div class="event-form-header">
+        <h2>{{ isEditMode ? 'Edit Event' : 'New Event' }}</h2>
+        <button type="button" class="close-btn" (click)="onCancel()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+
+    <form [formGroup]="eventForm" class="event-form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="title">Title *</label>
+            <input type="text" id="title" formControlName="title" placeholder="Event title" class="form-control" />
+            <div class="error-message" *ngIf="eventForm.get('title')?.invalid && eventForm.get('title')?.touched">
+                Title is required
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="startTime">Start Time *</label>
+                <input type="datetime-local" id="startTime" formControlName="startTime" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="endTime">End Time *</label>
+                <input type="datetime-local" id="endTime" formControlName="endTime" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+                <input type="checkbox" formControlName="allDay" />
+                <span>All day event</span>
+            </label>
+        </div>
+
+        <!-- Optional Fields Toggles -->
+        <div class="optional-fields-section" *ngIf="!showLocation || !showAttendees">
+            <button type="button" class="btn-add-field" *ngIf="!showLocation" (click)="showLocation = true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Add location
+            </button>
+            <button type="button" class="btn-add-field" *ngIf="!showAttendees" (click)="showAttendees = true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Add attendees
+            </button>
+        </div>
+
+        <!-- Location Field -->
+        <div class="form-group" *ngIf="showLocation">
+            <div class="field-header">
+                <label for="location">Location</label>
+                <button type="button" class="btn-remove-field"
+                    (click)="showLocation = false; eventForm.patchValue({location: ''})">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <input type="text" id="location" formControlName="location" placeholder="Add location"
+                class="form-control" />
+        </div>
+
+        <!-- Attendees Field -->
+        <div class="form-group" *ngIf="showAttendees">
+            <div class="field-header">
+                <label for="attendees">Attendees</label>
+                <button type="button" class="btn-remove-field"
+                    (click)="showAttendees = false; eventForm.patchValue({attendees: ''})">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <input type="text" id="attendees" formControlName="attendees"
+                placeholder="email1@example.com, email2@example.com" class="form-control" />
+            <small class="form-hint">Separate multiple emails with commas</small>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" placeholder="Add description" rows="4"
+                class="form-control"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="onCancel()">
+                Cancel
+            </button>
+            <div class="actions-right">
+                <button *ngIf="isEditMode" type="button" class="btn btn-danger" (click)="onDelete()">
+                    Delete
+                </button>
+                <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">
+                    {{ isEditMode ? 'Update' : 'Create' }}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
