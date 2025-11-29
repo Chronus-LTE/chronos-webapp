@@ -1,0 +1,24 @@
+<div class="mail-layout">
+    <!-- Sync Status Banner -->
+    <div class="sync-banner" *ngIf="syncing$ | async">
+        <i class="fas fa-sync fa-spin"></i>
+        <span *ngIf="syncStatus$ | async as status">
+            Syncing emails... {{ status.synced_messages || 0 }}/{{ status.total_messages || 0 }}
+            ({{ status.progress_percentage || 0 }}%)
+        </span>
+        <span *ngIf="!(syncStatus$ | async)">Syncing emails...</span>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="mail-content">
+        <div class="sidebar-pane">
+            <app-mail-sidebar></app-mail-sidebar>
+        </div>
+        <div class="list-pane">
+            <app-mail-list></app-mail-list>
+        </div>
+        <div class="detail-pane">
+            <app-mail-detail></app-mail-detail>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="compose-modal">
+    <div class="compose-header">
+        <h3>New Message</h3>
+        <button class="close-btn" (click)="cancel()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <form [formGroup]="composeForm" (ngSubmit)="send()" class="compose-form">
+        <div class="form-group">
+            <label>To</label>
+            <input type="email" formControlName="to" placeholder="recipient@example.com" class="form-control">
+            <div class="error" *ngIf="composeForm.get('to')?.invalid && composeForm.get('to')?.touched">
+                Please enter a valid email address
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Subject</label>
+            <input type="text" formControlName="subject" placeholder="Email subject" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Message</label>
+            <textarea formControlName="body" rows="10" placeholder="Write your message..."
+                class="form-control"></textarea>
+        </div>
+
+        <div class="compose-footer">
+            <button type="submit" class="btn-send" [disabled]="composeForm.invalid || sending">
+                <i class="fas fa-paper-plane"></i>
+                {{ sending ? 'Sending...' : 'Send' }}
+            </button>
+            <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

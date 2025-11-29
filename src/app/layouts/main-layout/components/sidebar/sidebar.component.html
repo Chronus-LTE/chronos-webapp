@@ -10,8 +10,8 @@
     <nav class="sidebar-nav">
         <div class="nav-section">
             <button *ngFor="let item of navItems" class="nav-item" [class.active]="isActive(item.route)"
-                (click)="navigate(item.route)" [attr.aria-label]="item.label"
-                [ngbTooltip]="item.label" placement="right" container="body">
+                (click)="navigate(item.route)" [attr.aria-label]="item.label" [ngbTooltip]="item.label"
+                placement="right" container="body">
                 <span class="nav-icon">
                     <!-- Chat Icon -->
                     <svg *ngIf="item.icon === 'chat'" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -47,16 +47,46 @@
         </div>
 
         <!-- Profile Section -->
+        <!-- Profile Section -->
         <div class="nav-section nav-section-bottom">
-            <button class="nav-item profile-item" aria-label="Profile" [ngbTooltip]="'Profile'" placement="right" container="body">
-                <span class="nav-icon profile-avatar">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </span>
-                <span class="nav-label" *ngIf="!collapsed">Profile</span>
-            </button>
+            <ng-container *ngIf="currentUser$ | async as user; else noUser">
+                <div class="profile-container" ngbDropdown placement="top-left" container="body">
+                    <button class="nav-item profile-item" ngbDropdownToggle>
+                        <div class="nav-icon profile-avatar">
+                            <img [src]="getAvatar(user)" alt="User Avatar" class="avatar-img">
+                        </div>
+                        <span class="nav-label" *ngIf="!collapsed">{{ user.full_name }}</span>
+                    </button>
+                    <div ngbDropdownMenu class="profile-dropdown">
+                        <div class="dropdown-header">
+                            <img [src]="getAvatar(user)" alt="User Avatar" class="dropdown-avatar">
+                            <div class="dropdown-user-info">
+                                <span class="dropdown-name">{{ user.full_name }}</span>
+                                <span class="dropdown-email">{{ user.email }}</span>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <button ngbDropdownItem (click)="navigate('/profile')">
+                            <i class="fas fa-user"></i> Profile
+                        </button>
+                        <button ngbDropdownItem (click)="navigate('/settings')">
+                            <i class="fas fa-cog"></i> Settings
+                        </button>
+                        <div class="dropdown-divider"></div>
+                        <button ngbDropdownItem (click)="logout()" class="text-danger">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #noUser>
+                <button class="nav-item profile-item" (click)="navigate('/auth/login')">
+                    <div class="nav-icon profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="nav-label" *ngIf="!collapsed">Login</span>
+                </button>
+            </ng-template>
         </div>
     </nav>
 </aside>

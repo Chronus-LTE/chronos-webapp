@@ -13,7 +13,7 @@ export interface RegisterRequest {
 export interface User {
     email: string;
     full_name: string;
-    id: number;
+    id: string;
     picture: string;
     google_id: string;
     is_active: boolean;
