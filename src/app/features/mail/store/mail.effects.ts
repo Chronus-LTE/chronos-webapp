@@ -114,7 +114,7 @@ export class MailEffects {
                 this.store.dispatch(MailActions.loadUnreadCount());
                 return MailActions.markAsReadSuccess({ id: action.id });
             }),
-            catchError(error => of(MailActions.markAsReadFailure({ error })))
+            catchError(error => of(MailActions.markAsReadFailure({ error, id: action.id })))
         ))
     ));
 
@@ -126,7 +126,7 @@ export class MailEffects {
                 this.store.dispatch(MailActions.loadUnreadCount());
                 return MailActions.markAsUnreadSuccess({ id: action.id });
             }),
-            catchError(error => of(MailActions.markAsUnreadFailure({ error })))
+            catchError(error => of(MailActions.markAsUnreadFailure({ error, id: action.id })))
         ))
     ));
 
@@ -134,7 +134,7 @@ export class MailEffects {
         ofType(MailActions.deleteEmail),
         mergeMap(action => this.mailService.deleteEmail(action.id).pipe(
             map(() => MailActions.deleteEmailSuccess({ id: action.id })),
-            catchError(error => of(MailActions.deleteEmailFailure({ error })))
+            catchError(error => of(MailActions.deleteEmailFailure({ error, id: action.id })))
         ))
     ));
 
@@ -146,7 +146,7 @@ export class MailEffects {
                 : this.mailService.unstarEmail(action.id);
             return obs.pipe(
                 map(() => MailActions.toggleStarSuccess({ id: action.id, starred: action.starred })),
-                catchError(error => of(MailActions.toggleStarFailure({ error })))
+                catchError(error => of(MailActions.toggleStarFailure({ error, id: action.id, starred: action.starred })))
             );
         })
     ));

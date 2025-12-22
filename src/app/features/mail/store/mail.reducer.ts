@@ -174,7 +174,8 @@ export const mailReducer = createReducer(
     })),
 
     // Mark Read/Unread
-    on(MailActions.markAsReadSuccess, (state, { id }) => ({
+    // Mark Read/Unread
+    on(MailActions.markAsRead, (state, { id }) => ({
         ...state,
         emails: state.emails.map(email =>
             email.id === id ? { ...email, isUnread: false } : email
@@ -183,13 +184,32 @@ export const mailReducer = createReducer(
             ? { ...state.selectedEmail, isUnread: false }
             : state.selectedEmail
     })),
-    on(MailActions.markAsUnreadSuccess, (state, { id }) => ({
+    on(MailActions.markAsReadFailure, (state, { id }) => ({
         ...state,
         emails: state.emails.map(email =>
             email.id === id ? { ...email, isUnread: true } : email
         ),
         selectedEmail: state.selectedEmail && state.selectedEmail.id === id
             ? { ...state.selectedEmail, isUnread: true }
+            : state.selectedEmail
+    })),
+
+    on(MailActions.markAsUnread, (state, { id }) => ({
+        ...state,
+        emails: state.emails.map(email =>
+            email.id === id ? { ...email, isUnread: true } : email
+        ),
+        selectedEmail: state.selectedEmail && state.selectedEmail.id === id
+            ? { ...state.selectedEmail, isUnread: true }
+            : state.selectedEmail
+    })),
+    on(MailActions.markAsUnreadFailure, (state, { id }) => ({
+        ...state,
+        emails: state.emails.map(email =>
+            email.id === id ? { ...email, isUnread: false } : email
+        ),
+        selectedEmail: state.selectedEmail && state.selectedEmail.id === id
+            ? { ...state.selectedEmail, isUnread: false }
             : state.selectedEmail
     })),
 
@@ -204,13 +224,23 @@ export const mailReducer = createReducer(
     })),
 
     // Star/Unstar
-    on(MailActions.toggleStarSuccess, (state, { id, starred }) => ({
+    // Star/Unstar
+    on(MailActions.toggleStar, (state, { id, starred }) => ({
         ...state,
         emails: state.emails.map(email =>
             email.id === id ? { ...email, isStarred: starred } : email
         ),
         selectedEmail: state.selectedEmail && state.selectedEmail.id === id
             ? { ...state.selectedEmail, isStarred: starred }
+            : state.selectedEmail
+    })),
+    on(MailActions.toggleStarFailure, (state, { id, starred }) => ({
+        ...state,
+        emails: state.emails.map(email =>
+            email.id === id ? { ...email, isStarred: !starred } : email
+        ),
+        selectedEmail: state.selectedEmail && state.selectedEmail.id === id
+            ? { ...state.selectedEmail, isStarred: !starred }
             : state.selectedEmail
     })),
 

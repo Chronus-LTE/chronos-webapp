@@ -2,207 +2,329 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--main-bg);
+  background-color: #ffffff;
   overflow-y: auto;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
 }
 
+/* Header Sections */
 .detail-header {
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--main-border);
-  background-color: var(--content-bg);
-}
+  padding: 24px 32px;
+  background-color: #fff;
+  border-bottom: 1px solid #f0f0f0;
 
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.subject {
-  font-family: var(--font-primary);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--neutral-ink);
-  margin: 0;
-  flex: 1;
-  line-height: 1.4;
-  word-break: break-word;
-}
-
-.actions {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-.action-btn {
-  background: transparent;
-  border: 1px solid var(--main-border);
-  color: var(--sidebar-text);
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 14px;
-
-  &:hover {
-    background-color: var(--sidebar-hover);
-    color: var(--neutral-ink);
-    border-color: var(--sidebar-text);
+  .header-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  &.starred {
-    color: #f59e0b;
-    border-color: #f59e0b;
-
-    &:hover {
-      background-color: #fef3c7;
-    }
+  .subject {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.4;
   }
 
-  &.delete-btn:hover {
-    background-color: #fee2e2;
-    color: #dc2626;
-    border-color: #dc2626;
+  .header-metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 }
 
 .sender-info {
   display: flex;
-  align-items: center;
   gap: 12px;
+  align-items: flex-start;
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #eaeaea;
+  }
+
+  .sender-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sender-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+
+    .sender-name {
+      font-weight: 600;
+      color: #1a1a1a;
+      font-size: 14px;
+    }
+
+    .sender-email {
+      font-size: 13px;
+      color: #666;
+    }
+  }
+
+  .recipient-row {
+    font-size: 12px;
+    color: #666;
+    display: flex;
+    gap: 4px;
+  }
 }
 
-.avatar {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: var(--clay-200);
+.meta-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+
+  .date {
+    font-size: 12px;
+    color: #888;
+  }
 }
 
-.sender-details {
-  flex: 1;
-  min-width: 0;
-}
-
-.sender-name {
-  font-weight: 600;
-  color: var(--neutral-ink);
-  font-size: 15px;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.email-meta {
-  font-size: 13px;
-  color: var(--sidebar-text-secondary);
+/* Actions */
+.actions {
   display: flex;
   align-items: center;
   gap: 4px;
-  flex-wrap: wrap;
+
+  .divider {
+    width: 1px;
+    height: 20px;
+    background-color: #eaeaea;
+    margin: 0 8px;
+  }
 }
 
-.meta-label {
-  font-weight: 500;
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+
+  &.starred {
+    color: #f59e0b;
+
+    &:hover {
+      background-color: #fffbeb;
+    }
+  }
+
+  &.delete-btn:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+  }
+
+  i {
+    font-size: 14px;
+  }
 }
 
-.meta-value {
-  font-weight: 400;
-}
-
-.meta-date {
-  margin-left: auto;
+/* Email Body */
+.detail-content-wrapper {
+  padding: 32px;
+  flex: 1;
 }
 
 .detail-body {
-  padding: 32px;
-  color: var(--sidebar-text);
-  line-height: 1.6;
   font-size: 15px;
-}
+  line-height: 1.6;
+  color: #2c2c2c;
+  max-width: 800px;
 
-.empty-detail {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--sidebar-text-secondary);
-  background-color: var(--content-bg);
-  padding: 48px;
+  /* Reset styles for email content but keep formatting */
+  ::ng-deep {
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
 
-  .empty-icon {
-    font-size: 64px;
-    margin-bottom: 16px;
-    color: var(--clay-300);
-  }
+    a {
+      color: #2563eb;
+      text-decoration: none;
 
-  p {
-    font-size: 16px;
-    margin: 0;
-    color: var(--sidebar-text-secondary);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
+/* Attachments */
 .attachments {
-  padding: 0 32px 32px;
-  border-top: 1px solid var(--main-border);
-  margin-top: auto;
+  padding: 20px 32px;
+  background-color: #fcfcfc;
+  border-top: 1px solid #f0f0f0;
 }
 
-.attachment-title {
+.attachment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--sidebar-text-secondary);
-  margin: 16px 0 12px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 12px;
+
+  i {
+    color: #888;
+  }
 }
 
 .attachment-list {
   display: flex;
-  gap: 12px;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
 .attachment-item {
   display: flex;
   align-items: center;
+  gap: 12px;
   padding: 8px 12px;
-  background-color: var(--content-bg);
-  border: 1px solid var(--main-border);
-  border-radius: 6px;
-  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  min-width: 200px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-color: #d4d4d4;
+  }
+
+  .att-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f4f6;
+    border-radius: 6px;
+    color: #6b7280;
+  }
+
+  .att-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .att-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .att-size {
+    font-size: 11px;
+    color: #9ca3af;
+  }
+
+  .att-download {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #f3f4f6;
+      color: #4b5563;
+    }
+  }
 }
 
-.attachment-item:hover {
-  background-color: var(--sidebar-hover);
+/* Empty State */
+.empty-detail {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafb;
 }
 
-.attachment-item i {
-  margin-right: 8px;
-  color: var(--clay-600);
+.empty-state-content {
+  text-align: center;
+
+  .icon-circle {
+    width: 64px;
+    height: 64px;
+    background-color: #f3f4f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+
+    i {
+      font-size: 24px;
+      color: #9ca3af;
+    }
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #111827;
+    margin: 0 0 8px;
+  }
+
+
+  p {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+  }
 }
 
-.att-info {
+.loading-state {
+  height: 100%;
   display: flex;
   flex-direction: column;
-}
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
 
-.att-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--sidebar-text);
-}
+  .spinner {
+    font-size: 32px;
+    color: #9ca3af;
+  }
 
-.att-size {
-  font-size: 11px;
-  color: var(--sidebar-text-secondary);
+  p {
+    font-size: 14px;
+    margin: 0;
+  }
 }

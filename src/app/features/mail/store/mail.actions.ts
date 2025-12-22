@@ -114,7 +114,7 @@ export const markAsReadSuccess = createAction(
 
 export const markAsReadFailure = createAction(
     '[Mail] Mark As Read Failure',
-    props<{ error: any }>()
+    props<{ error: any; id: string }>()
 );
 
 export const markAsUnread = createAction(
@@ -129,7 +129,7 @@ export const markAsUnreadSuccess = createAction(
 
 export const markAsUnreadFailure = createAction(
     '[Mail] Mark As Unread Failure',
-    props<{ error: any }>()
+    props<{ error: any; id: string }>()
 );
 
 // Selection
@@ -156,7 +156,7 @@ export const toggleStarSuccess = createAction(
 
 export const toggleStarFailure = createAction(
     '[Mail] Toggle Star Failure',
-    props<{ error: any }>()
+    props<{ error: any; id: string; starred: boolean }>()
 );
 
 // Delete
@@ -172,7 +172,7 @@ export const deleteEmailSuccess = createAction(
 
 export const deleteEmailFailure = createAction(
     '[Mail] Delete Email Failure',
-    props<{ error: any }>()
+    props<{ error: any; id: string }>()
 );
 
 // Compose

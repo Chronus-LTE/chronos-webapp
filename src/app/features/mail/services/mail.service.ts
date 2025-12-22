@@ -171,6 +171,7 @@ export class MailService {
             cc: apiEmail.cc,
             snippet: apiEmail.snippet || '',
             body_plain: apiEmail.body_plain || '',
+            body_html: apiEmail.body_html || '',
             date: new Date(apiEmail.date),
             labels: apiEmail.labels || [],
             isUnread: apiEmail.isUnread ?? false,

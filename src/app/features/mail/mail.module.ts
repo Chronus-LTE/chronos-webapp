@@ -10,6 +10,7 @@ import { MailSidebarComponent } from './components/mail-sidebar/mail-sidebar.com
 import { MailListComponent } from './components/mail-list/mail-list.component';
 import { MailDetailComponent } from './components/mail-detail/mail-detail.component';
 import { ComposeEmailComponent } from './components/compose-email/compose-email.component';
+import { EmailBodyComponent } from './components/email-body/email-body.component';
 import { mailReducer } from './store/mail.reducer';
 import { MailEffects } from './store/mail.effects';
 
@@ -26,7 +27,8 @@ const routes: Routes = [
         MailSidebarComponent,
         MailListComponent,
         MailDetailComponent,
-        ComposeEmailComponent
+        ComposeEmailComponent,
+        EmailBodyComponent
     ],
     imports: [
         CommonModule,
