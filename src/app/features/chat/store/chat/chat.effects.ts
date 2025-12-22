@@ -106,10 +106,13 @@ export class ChatEffects {
     this.actions$.pipe(
       ofType(ChatActions.deleteConversation),
       switchMap(({ conversationId }) =>
-        // TODO: Implement delete API endpoint in chat.service
-        of(ChatActions.deleteConversationSuccess({ conversationId })).pipe(
+        this.chatService.deleteConversation(conversationId).pipe(
+          map(() => ChatActions.deleteConversationSuccess({ conversationId })),
           tap(() => {
+            // Reload conversations list
             this.store.dispatch(ChatActions.loadConversations());
+            // Navigate to main chat if we deleted the current conversation
+            this.router.navigate(['/chat']);
           }),
           catchError((error) =>
             of(ChatActions.deleteConversationError({ error: error.message }))
@@ -124,5 +127,5 @@ export class ChatEffects {
     private chatService: ChatService,
     private router: Router,
     private store: Store
-  ) {}
+  ) { }
 }
