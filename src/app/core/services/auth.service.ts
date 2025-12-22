@@ -109,4 +109,12 @@ export class AuthService {
                 })
             );
     }
+
+    refreshToken(): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${this.apiUrl}/auth/refresh`, {}, {
+            withCredentials: true
+        }).pipe(
+            tap(response => this.handleAuthResponse(response))
+        );
+    }
 }
