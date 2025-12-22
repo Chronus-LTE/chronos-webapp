@@ -211,10 +211,13 @@
 
 // Loading State
 .loading-state {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
   padding: 48px 16px;
   color: var(--sidebar-text-secondary);
 

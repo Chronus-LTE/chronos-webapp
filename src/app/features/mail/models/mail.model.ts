@@ -8,6 +8,7 @@ export interface Email {
     cc?: string;
     snippet: string;
     body_plain?: string;
+    body_html?: string;
     date: Date;
     labels: string[];
     isUnread: boolean;

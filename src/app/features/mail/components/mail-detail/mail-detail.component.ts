@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -9,13 +10,19 @@ import * as MailSelectors from '../../store/mail.selectors';
 @Component({
   selector: 'app-mail-detail',
   templateUrl: './mail-detail.component.html',
-  styleUrls: ['./mail-detail.component.scss']
+  styleUrls: ['./mail-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MailDetailComponent implements OnInit {
   email$: Observable<Email | null>;
+  loading$: Observable<boolean>;
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private sanitizer: DomSanitizer
+  ) {
     this.email$ = this.store.select(MailSelectors.selectSelectedEmail);
+    this.loading$ = this.store.select(MailSelectors.selectLoading);
   }
 
   ngOnInit(): void {
@@ -94,5 +101,12 @@ export class MailDetailComponent implements OnInit {
     const sizes = ['B', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  }
+
+  getEmailContent(email: Email): SafeHtml | string {
+    if (email.body_html) {
+      return this.sanitizer.bypassSecurityTrustHtml(email.body_html);
+    }
+    return email.body_plain || '';
   }
 }
