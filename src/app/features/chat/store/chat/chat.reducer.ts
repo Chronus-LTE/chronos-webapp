@@ -8,26 +8,24 @@ export const chatReducer = createReducer(
   // Load Conversations
   on(ChatActions.loadConversations, (state) => ({
     ...state,
-    isLoading: true,
     error: null
   })),
 
   on(ChatActions.loadConversationsSuccess, (state, { conversations }) => ({
     ...state,
     chatHistory: conversations,
-    isLoading: false,
     error: null
   })),
 
   on(ChatActions.loadConversationsError, (state, { error }) => ({
     ...state,
-    isLoading: false,
     error
   })),
 
   // Load Chat History
   on(ChatActions.loadChatHistory, (state) => ({
     ...state,
+    messages: [],
     isLoading: true,
     error: null
   })),
@@ -71,7 +69,8 @@ export const chatReducer = createReducer(
   // Add Message
   on(ChatActions.addMessage, (state, { message }) => ({
     ...state,
-    messages: [...state.messages, message]
+    messages: [...state.messages, message],
+    isChatStarted: true
   })),
 
   // Set User Message

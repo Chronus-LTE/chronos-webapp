@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@ang
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { AuthService } from '../../core/services/auth.service';
 import { Message, ChatHistory, Suggestion } from './models/chat.model';
 import { CHAT_SUGGESTIONS } from './models/chat.suggestions';
@@ -57,8 +58,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.activatedRoute.params.subscribe(params => {
       const conversationId = params['conversationId'];
       if (conversationId) {
-        this.store.dispatch(ChatActions.setCurrentConversation({ conversationId }));
-        this.store.dispatch(ChatActions.loadChatHistory({ conversationId }));
+        let currentId: string | null = null;
+        this.currentConversationId$.pipe(take(1)).subscribe((id: string) => currentId = id);
+
+        if (currentId !== conversationId) {
+          this.store.dispatch(ChatActions.setCurrentConversation({ conversationId }));
+          this.store.dispatch(ChatActions.loadChatHistory({ conversationId }));
+        }
       }
     });
   }
